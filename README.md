@@ -4,7 +4,7 @@ The SQL Project analyze online music store data.
 The dataset helps in understanding and improving business growth by providing answers to important questions. The data can be used to extract meaningful information that record companies can utilize to enhance their promotional activities and stock up on essential artists/genres.
 
 
-Business Objective that can be achieved are:
+**Business Objective that can be achieved are:**
 -How can we optimize our profits?
 
 -What are the emerging trends that we can identify?
@@ -13,7 +13,7 @@ Business Objective that can be achieved are:
 
 
 
-Business objectives can be addressed by answering the following questions:
+**Business objectives can be addressed by answering the following questions:**
 
 -Which is the most profitable region & what are the top 5 most popular genres there?
 

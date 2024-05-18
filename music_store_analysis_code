@@ -1,0 +1,191 @@
+---Senior most employee based on the job title---
+SELECT * FROM employee
+ORDER BY levels DESC
+LIMIT 1;
+
+
+
+---Countries with most invoices---
+SELECT COUNT(*) AS count , billing_country
+FROM invoice
+GROUP BY billing_country
+ORDER BY count DESC;
+
+
+
+---What are top 3 values of total invoices---
+SELECT * FROM invoice 
+ORDER BY total DESC
+LIMIT 3;
+
+
+
+---City with the best customers,city with the highest sum of invoices---
+SELECT SUM(total) AS invoice_t, billing_city  
+FROM invoice
+GROUP BY billing_city
+ORDER BY invoice_t DESC;
+
+
+
+---Finding best customer. The person who has spent the most money is the best customer.---
+SELECT C.customer_id, C.first_name, C.last_name, SUM(I.total) AS total_invoice
+FROM customer C
+JOIN invoice I
+ON C.customer_id = I.customer_id
+GROUP BY C.customer_id
+ORDER BY total_invoice DESC
+LIMIT 1;
+
+
+
+-----Moderate Level Queries-----
+---List of all rock music listenerss with their email, first name, last name, and genre---
+--email should be in ascending order--
+SELECT DISTINCT C.email, C.first_name, C.last_name
+FROM customer C 
+JOIN invoice I ON C.customer_id = I.customer_id
+JOIN invoice_line IV ON I.invoice_id = IV.invoice_id 
+WHERE track_id IN(
+   SELECT track_id FROM track 
+   JOIN genre  ON track.genre_id = genre.genre_id 
+   WHERE genre.name LIKE 'Rock'
+)
+ORDER BY C.email;
+
+
+
+---Artist who has written the most rock music---
+--display the track count of top 10 rock artist only--
+SELECT A.artist_id, A.name, COUNT(A.artist_id) AS number_of_songs
+FROM track T
+JOIN album AL ON AL.album_id = T.album_id
+JOIN artist A  ON A.artist_id = AL.artist_id
+JOIN genre G ON G.genre_id = T.genre_id
+WHERE G.name LIKE 'Rock'
+GROUP BY A.artist_id
+ORDER BY number_of_songs DESC 
+LIMIT 10;  
+
+
+
+---List of all the tracks that have a song length longer than the average song length---
+--the longest song should display first--
+--the name and duration of tracks should be displayed in millesecond--
+SELECT name, milliseconds 
+FROM track 
+WHERE milliseconds >(
+SELECT AVG(milliseconds) AS avg_track_length
+FROM track)
+ORDER BY milliseconds DESC;
+
+---or---
+
+SELECT name, milliseconds 
+FROM track 
+WHERE milliseconds >393599
+ORDER BY milliseconds DESC;
+
+
+
+----Advanced Level Queries----
+---Amount spend by customer on the artist---
+CREATE TABLE Best_Artist_Selling  AS
+SELECT AR.artist_id AS artist_id_, AR.name AS artist_name, SUM(INL.unit_price * INL.quantity) AS total_sales
+FROM invoice_line INL
+JOIN track T ON T.track_id = INL.track_id
+JOIN album A ON A.album_id = T.album_id
+JOIN artist AR ON AR.artist_id = A.artist_id
+GROUP BY artist_id_
+ORDER BY total_sales DESC  
+LIMIT 1;
+
+SELECT C.customer_id AS customer_id  , C.first_name, C.last_name, BAS.artist_name AS artist_name,
+SUM(INL.unit_price + INL.quantity) AS amount_spend
+FROM invoice I
+JOIN customer C ON C.customer_id = I.customer_id 
+JOIN invoice_line INL ON INL.invoice_id = I.invoice_id
+JOIN track T ON T.track_id = INL.track_id
+JOIN album A ON A.album_id = T.album_id
+JOIN Best_Artist_Selling BAS ON BAS.artist_id_ = A.artist_id
+GROUP BY 1,2,3,4
+ORDER BY amount_spend DESC;
+
+
+----Most popular genre for eah country, moat popular gnre = genre with highest amount of purchases----
+---if for the country mximum number of purchases is shared then return all genres---
+CREATE TABLE popular_genre AS 
+SELECT COUNT(INL.quantity) AS purchases, C.country AS Country , G.name AS G_Name, G.genre_id AS Genre, 
+ROW_NUMBER() OVER(PARTITION BY C.country ORDER BY COUNT(INL.quantity) DESC) AS Row_No
+FROM invoice_line INL
+JOIN invoice I ON I.invoice_id = INL.invoice_id 
+JOIN customer C ON C.customer_id = I.customer_id
+JOIN track T ON T.track_id = INL.track_id
+JOIN genre G ON G.genre_id = T.genre_id 
+GROUP BY Country, G_Name, Genre
+ORDER BY Country ASC, purchases DESC;
+
+SELECT * FROM popular_genre WHERE Row_No <= 1;
+
+
+
+
+--OR--
+--Method 2--
+---Recursive Method---
+WITH RECURSIVE sales_per_country AS 
+(
+SELECT COUNT(*) AS purchases_per_genre, C.country AS Country, G.name AS G_Name, G.genre_id AS Genre
+FROM invoice_line INL
+JOIN invoice I ON I.invoice_id = INL.invoice_id 
+JOIN customer C ON C.customer_id = I.customer_id
+JOIN track T ON T.track_id = INL.track_id
+JOIN genre G ON G.genre_id = T.genre_id 
+GROUP BY Country, G_Name, Genre
+ORDER BY Country
+),
+max_genre_per_country AS (SELECT MAX(Purchases_per_genre) AS max_genre_number, Country 
+FROM sales_per_country
+GROUP BY 2
+ORDER BY 2 )
+
+SELECT sales_per_country.* FROM sales_per_country 
+JOIN max_genre_per_country ON sales_per_country.country = max_genre_per_country.country
+WHERE sales_per_country.purchases_per_genre = max_genre_per_country.max_genre_number;
+
+
+
+----Customers that has spent the mot on music for each country----
+--return the country with top customer and how much they spent--
+WITH RECURSIVE
+customer_with_country AS (
+SELECT C.customer_id AS Customer_ID, first_name, last_name, billing_country, SUM(total) AS total_spending
+FROM invoice I
+JOIN customer C ON C.customer_id = I.customer_id 
+GROUP BY 1,2,3,4
+ORDER BY 2,3 DESC),
+
+country_max_spending AS (
+SELECT billing_country, MAX(total_spending) AS max_spending 
+FROM customer_with_country 
+GROUP BY billing_country)
+
+SELECT CC.billing_country, CC.total_spending, CC.first_name , CC.last_name, CC.Customer_ID
+FROM customer_with_country CC
+JOIN country_max_spending MS 
+ON CC.billing_country = MS.billing_country
+WHERE CC.total_spending = MS.max_spending
+ORDER BY 1;
+
+
+
+--Method_2--
+CREATE TABLE Customer_with_country_ AS 
+SELECT C.customer_id AS Customer_, first_name, last_name, billing_country, SUM(total) AS total_spending,
+ROW_NUMBER() OVER(PARTITION BY billing_country ORDER BY SUM(total) DESC) AS Row_No
+FROM invoice I
+JOIN customer C ON C.customer_id = I.customer_id
+GROUP BY Customer_, first_name, last_name, billing_country
+ORDER BY billing_country ASC, total_spending DESC;
+
+SELECT * FROM Customer_with_country_ WHERE Row_No <= 1;

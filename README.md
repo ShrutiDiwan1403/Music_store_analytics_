@@ -14,7 +14,7 @@ The dataset helps in understanding and improving business growth by providing an
 
 
 
-**Business objectives can be addressed by answering the following questions:**
+**Business objectives can be addressed by answering the following queries:**
 
 -Which is the most profitable region & what are the top 5 most popular genres there?
 
@@ -26,11 +26,11 @@ The dataset helps in understanding and improving business growth by providing an
 
 -What is the top spending customer spending in each country?
 
--Country with most  music invoices
+-Country with most  music invoices.
 
--City with the best customer
+-City with the best customer.
 
--The artist who has written the most rock music
+-The artist who has written the most rock music.
 
--The track that has a song length longer than the average song length 
+-The track that has a song length longer than the average song length.
 And more.

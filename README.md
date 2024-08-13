@@ -7,11 +7,15 @@
 
 **Business Objective that are achieved** : A lot of business objectives can be achieved with the Analysis. The ones covered in this process are:
 
-Profit Optimization: Identifying the most profitable regions and understanding the top 5 most popular genres in those areas will allow us to focus on high-performing markets. Similarly, identifying the top 5 non-performing regions will help us address challenges and unlock potential growth opportunities.
+Profit Optimization:
 
-Emerging Trends: By analyzing the genres with the most customers and determining which artist has sold the most records, we can stay ahead of market trends and tailor our offerings accordingly.
+Profit optimization involves identifying the most profitable regions and understanding the top five most popular genres in those areas, allowing the company to focus on high-performing markets. Additionally, by pinpointing the top five non-performing regions, the company can address challenges and unlock potential growth opportunities.
 
-Customer Insights: Understanding where the top 10 customers are located and the top spending customers in each country will provide us with valuable insights into customer behavior, enabling us to refine our marketing and sales strategies.
+Emerging Trends:
+
+To stay ahead of trends, the company can analyze popular genres and top-selling artists to tailor its offerings to market demands.
+
+- Customer Insights: Gaining customer insights involves understanding the locations of the top 10 customers and identifying the top spending customers in each country. These insights can allow the company to refine its marketing and sales strategies based on customer behavior.
 
 Market Analysis: Determining which country has the most music invoices, the city with the best customers, and the artist who has written the most rock music will help us identify key markets and influential artists, further driving our business success.
 

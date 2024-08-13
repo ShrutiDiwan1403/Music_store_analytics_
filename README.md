@@ -34,7 +34,7 @@ Product analysis aids in identifying tracks that exceed the average song length.
 
 
 
-**Tools**: SQLite
+**Tool**: SQLite
 
 
 

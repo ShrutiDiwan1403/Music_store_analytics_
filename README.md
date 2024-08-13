@@ -42,5 +42,4 @@
 And more.
 
 ![music_vinyl____](https://github.com/user-attachments/assets/99a8f913-2e14-4e91-a474-faf8e95dface)
-![music_vinyl_](https://github.com/user-attachments/assets/e0ab35cb-2fb7-47ce-b87e-9bf716b328ba)
 

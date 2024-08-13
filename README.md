@@ -16,6 +16,8 @@ Customer Insights: Understanding where the top 10 customers are located and the 
 Market Analysis: Determining which country has the most music invoices, the city with the best customers, and the artist who has written the most rock music will help us identify key markets and influential artists, further driving our business success.
 
 Product Analysis: Identifying the track that exceeds the average song length will allow us to understand customer preferences for music, enabling us to tailor our content offerings.
+
+
 **Programming Language**: SQL
 
 

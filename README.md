@@ -1,11 +1,14 @@
-The SQL Project analyze online music store data.
+# Music Store Analysis
+**Objective Summary**: The Project analyze online music store data. The analysis helps in understanding and improving business growth by providing answers to important questions that arise during the process.
 
 
-The project is an eminent example of CUSTOMER ANALYTICS. It can help me understand how data can be used to gain insights into consumer behaviour, preferences, and needs, as well as how to develop targeted marketing and sales activities. The project also helped me gain some music business knowledge.
+**Description and Insight**: The project is an eminent example of CUSTOMER ANALYTICS. It can help one understand how data can be used to gain insights into consumer behaviour, preferences, and needs, as well as how to develop targeted marketing and sales activities. The project also helped one gain some music business knowledge.The data can be used to extract meaningful information that record companies can utilize to enhance their promotional activities and stock up on essential artists/genres.
 
 
-The dataset helps in understanding and improving business growth by providing answers to important questions. The data can be used to extract meaningful information that record companies can utilize to enhance their promotional activities and stock up on essential artists/genres.
+**Programming Language**: SQL
 
+
+**Tools**: SQLite
 
 **Business Objective that can be achieved are:**
 

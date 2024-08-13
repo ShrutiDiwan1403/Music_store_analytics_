@@ -41,9 +41,5 @@ Product analysis aids in identifying tracks that exceed the average song length.
 **Performance Outcome**: By addressing the quereies, one can not only optimize current operations but also strategically position ourselves to capitalize on emerging trends and customer preferences, ultimately driving profitability and growth.
 
 
-![music_store_analysis_](https://github.com/user-attachments/assets/9e605d21-fe14-405a-95e1-20fdf8a671ef)
-
-
-
 ![music_vinyl____](https://github.com/user-attachments/assets/99a8f913-2e14-4e91-a474-faf8e95dface)
 
